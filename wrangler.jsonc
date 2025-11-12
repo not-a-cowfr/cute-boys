@@ -7,14 +7,22 @@
 	"name": "cuteboys",
 	"main": ".svelte-kit/cloudflare/_worker.js",
 	"compatibility_date": "2025-11-11",
-	"compatibility_flags": ["nodejs_als"],
+	"compatibility_flags": [
+		"nodejs_als"
+	],
 	"assets": {
 		"binding": "ASSETS",
 		"directory": ".svelte-kit/cloudflare"
 	},
 	"observability": {
 		"enabled": true
-	}
+	},
+	"r2_buckets": [
+		{
+			"bucket_name": "cuteboys",
+			"binding": "cuteboys"
+		}
+	]
 	/**
 	 * Smart Placement
 	 * Docs: https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
