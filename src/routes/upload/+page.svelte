@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { addToast } from '$lib/Toaster.svelte';
 
-	let files: FileList | null = null;
+	let files: FileList | null = $state(null);
 
 	async function uploadFiles() {
 		if (!files || files.length === 0) {
@@ -71,7 +71,7 @@
 		</div>
 
 		<button
-			on:click={uploadFiles}
+			onclick={uploadFiles}
 			class="mt-3 w-full justify-center rounded-xl bg-primary py-2 font-semibold transition hover:bg-primary/80"
 		>
 			Upload
