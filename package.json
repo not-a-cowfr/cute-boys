@@ -19,7 +19,6 @@
 		"@eslint/compat": "^1.4.0",
 		"@eslint/js": "^9.36.0",
 		"@melt-ui/pp": "^0.3.2",
-		"@melt-ui/svelte": "^0.86.6",
 		"@sveltejs/adapter-auto": "^6.1.0",
 		"@sveltejs/adapter-cloudflare": "^7.2.4",
 		"@sveltejs/kit": "^2.43.2",
@@ -40,5 +39,9 @@
 		"typescript-eslint": "^8.44.1",
 		"vite": "^7.1.7",
 		"wrangler": "^4.47.0"
+	},
+	"dependencies": {
+		"@melt-ui/svelte": "^0.86.6",
+		"@lucide/svelte": "^0.553.0"
 	}
 }
