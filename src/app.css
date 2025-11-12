@@ -1,1 +1,98 @@
 @import 'tailwindcss';
+
+@layer base {
+	:root {
+		--radius: 0.5rem;
+
+		--background: hsl(220 15% 8%);
+		--foreground: hsl(220 10% 90%);
+
+		--primary: hsl(215 25% 40%);
+		--primary-foreground: hsl(220 10% 95%);
+		--primary-hover: hsl(215 25% 45%);
+
+		--secondary: hsl(220 12% 13%);
+		--secondary-foreground: hsl(220 10% 80%);
+
+		--destructive: hsl(0 30% 40%);
+		--destructive-foreground: hsl(220 10% 95%);
+
+		--muted-darker: hsl(240 5% 8%);
+		--muted: hsl(220 12% 12%);
+		--muted-variant: hsl(220 10% 18%);
+		--muted-foreground: hsl(220 10% 60%);
+
+		--accent: hsl(210 20% 35%);
+		--accent-foreground: hsl(220 10% 95%);
+
+		--border: hsl(220 12% 25%);
+		--link: hsl(205 60% 50%);
+	}
+
+	.light {
+		--background: hsl(210 20% 98%);
+		--foreground: hsl(220 15% 20%);
+
+		--primary: hsl(215 70% 80%);
+		--primary-foreground: hsl(0 0% 20%);
+		--primary-muted: hsl(215 70% 70%);
+
+		--secondary: hsl(210 20% 94%);
+		--secondary-foreground: hsl(220 15% 30%);
+
+		--destructive: hsl(0 65% 80%);
+		--destructive-foreground: hsl(0 0% 10%);
+
+		--muted-darker: hsl(210 20% 75%);
+		--muted: hsl(210 20% 85%);
+		--muted-foreground: hsl(220 10% 40%);
+		--muted-lighter: hsl(210 20% 95%);
+
+		--accent: hsl(215 70% 80%);
+		--accent-foreground: hsl(0 0% 10%);
+
+		--border: hsl(210 20% 90%);
+	}
+}
+
+@theme inline {
+	--radius-sm: calc(var(--radius) - 4px);
+	--radius-md: calc(var(--radius) - 2px);
+	--radius-lg: var(--radius);
+	--radius-xl: calc(var(--radius) + 4px);
+
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-primary-muted: var(--primary-muted);
+
+	/* --color-muted-darker: var(--muted-darker); */
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-muted-lighter: var(--muted-lighter);
+
+	--color-border: var(--border);
+	--color-link: var(--link);
+	/* --color-card: var(--card); */
+
+	--color-destructive: var(--destructive);
+	--color-destructive-foreground: var(--destructive-foreground);
+
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+}
+
+body {
+	background: var(--background);
+	color: var(--foreground);
+}
+
+button {
+	cursor: pointer;
+}
+
+button:disabled {
+	cursor: not-allowed;
+}
