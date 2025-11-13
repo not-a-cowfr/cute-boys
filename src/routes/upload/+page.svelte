@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { addToast } from '$lib/Toaster.svelte';
+	import { addToast } from '$comp/toaster.svelte';
 
 	let files: FileList | null = $state(null);
 
