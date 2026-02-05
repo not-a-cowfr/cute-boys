@@ -65,7 +65,7 @@
 						{#each menuItems as item, index (index)}
 							<li>
 								<a
-									href={resolve(item.href as any)}
+									href={item.href}
 									class="block text-muted-foreground duration-150 hover:text-accent-foreground"
 								>
 									<span>{item.name}</span>
