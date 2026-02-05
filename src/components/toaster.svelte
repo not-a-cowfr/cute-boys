@@ -13,6 +13,14 @@
 	} = createToaster<ToastData>();
 
 	export const addToast = helpers.addToast;
+
+	export function addErrorToast(title: string, description: string) {
+		addToast({ data: { title: `Error: ${title}`, description, color: 'red' } });
+	}
+
+	export function addSuccessToast(title: string, description: string) {
+		addToast({ data: { title, description: description, color: 'green' } });
+	}
 </script>
 
 <script lang="ts">
@@ -21,6 +29,7 @@
 	import { createToaster, melt } from '@melt-ui/svelte';
 </script>
 
+<!-- todo: dont use hardcoded tailwind colors -->
 <div
 	class="fixed top-0 right-0 z-50 m-4 flex flex-col items-end gap-2 md:top-auto md:bottom-0"
 	use:portal
