@@ -1,3 +1,9 @@
+<!--
+Modified version of https://github.com/Tonantzintla/MC-ID/tree/main/website/src/lib/components/ui/button
+made to be slightly simpler
+all credit to https://github.com/darthgigi (great web dev btw)
+-->
+
 <script lang="ts" module>
 	import { cn } from '$lib/utils.js';
 	import type { HTMLAnchorAttributes, HTMLButtonAttributes } from 'svelte/elements';
