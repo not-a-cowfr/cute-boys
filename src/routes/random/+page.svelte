@@ -1,11 +1,11 @@
-<script>
+<script lang="ts">
 	import { page } from '$app/state';
 	import Head from '$comp/head.svelte';
 </script>
 
 <Head
 	title="Random Cute Boy"
-	imageUrl="https://cuteboys.love/api/image/random"
+	imageUrl={`${page.url.origin}/api/image/random`}
 	twitterCardType="summary_large_image"
 />
 

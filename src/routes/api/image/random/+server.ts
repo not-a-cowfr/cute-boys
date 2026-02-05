@@ -6,9 +6,7 @@ export const GET: RequestHandler = async ({ platform, url }) => {
 
 	const list = await bucket.list();
 
-	if (list.objects.length === 0) {
-		return new Response('No images found', { status: 404 });
-	}
+	if (list.objects.length === 0) return new Response('No images found', { status: 404 });
 
 	const random = list.objects[Math.floor(Math.random() * list.objects.length)];
 

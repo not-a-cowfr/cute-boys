@@ -9,14 +9,7 @@ export const GET: RequestHandler = async ({ params, platform }) => {
 	const file = await bucket.get(key);
 
 	if (file) {
-		return new Response(file.body, {
-			headers: {
-				'Content-Type': file.httpMetadata?.contentType ?? 'application/octet-stream',
-				'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',
-				Pragma: 'no-cache',
-				Expires: '0'
-			}
-		});
+		return new Response(file.body);
 	} else {
 		return new Response(`No images found for id ${key}`, { status: 404 });
 	}
