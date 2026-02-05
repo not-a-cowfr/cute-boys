@@ -1,9 +1,13 @@
 <script lang="ts">
-	import Header from '$comp/header.svelte';
+	import Header from '$comp/header/header.svelte';
+	import ThemeWatcher from '$comp/theme-watcher.svelte';
 	import Toaster from '$comp/toaster.svelte';
+	import { initThemeContext } from '$lib/stores/themes.svelte';
 	import '../app.css';
 
 	let { children } = $props();
+
+	initThemeContext();
 </script>
 
 <svelte:head></svelte:head>
@@ -20,3 +24,4 @@
 {@render children?.()}
 
 <Toaster />
+<ThemeWatcher />

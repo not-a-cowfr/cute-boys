@@ -3,24 +3,25 @@
 	import { Button } from '$comp/ui/button';
 	import { cn } from '$lib/utils';
 	import Menu from '@lucide/svelte/icons/menu';
-	import { X } from '@lucide/svelte';
+	import { Paintbrush, X } from '@lucide/svelte';
 	import { scrollY } from 'svelte/reactivity/window';
+	import { getThemeContext } from '$lib/stores/themes.svelte';
+	import ThemePicker from '$comp/header/theme-picker.svelte';
 
 	type MenuItem = {
 		name: string;
 		href: string;
 	};
 
-	const {
-		menuItems,
-		showLoginButtons = true
-	}: { menuItems: MenuItem[]; showLoginButtons?: boolean } = $props();
+	const { menuItems }: { menuItems: MenuItem[] } = $props();
 
 	let menuState = $state(false);
 	let isScrolled = $derived.by(() => {
 		if (scrollY.current && scrollY.current > 50) return true;
 		return false;
 	});
+
+	const currentTheme = getThemeContext();
 </script>
 
 <header>
@@ -63,7 +64,6 @@
 					<ul class="flex gap-8 text-sm">
 						{#each menuItems as item, index (index)}
 							<li>
-								<!-- eslint-disable-next-line @typescript-eslint/no-explicit-any -->
 								<a
 									href={resolve(item.href as any)}
 									class="block text-muted-foreground duration-150 hover:text-accent-foreground"
@@ -74,34 +74,33 @@
 						{/each}
 					</ul>
 				</div>
-				{#if showLoginButtons}
-					<div
-						class={cn([
-							'mb-6 w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border-border bg-background p-6 shadow-2xl shadow-zinc-300/20 md:flex-nowrap md:border lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:bg-transparent lg:p-0 lg:shadow-none',
-							menuState ? 'block lg:flex' : 'hidden lg:flex'
-						])}
-					>
-						<div class="lg:hidden">
-							<ul class="space-y-6 text-base">
-								{#each menuItems as item, index (index)}
-									<li>
-										<Button
-											href={item.href}
-											variant="link"
-											class="block text-muted-foreground duration-150 hover:text-accent-foreground"
-										>
-											<span>{item.name}</span>
-										</Button>
-									</li>
-								{/each}
-							</ul>
-						</div>
-						<div class="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
-							<Button variant="outline" size="sm" href="/login">Login</Button>
-							<Button href="/signup" size="sm">Sign Up</Button>
-						</div>
+				<div
+					class={cn([
+						'mb-6 w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border-border bg-background p-6 shadow-2xl shadow-zinc-300/20 md:flex-nowrap  lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:bg-transparent lg:p-0 lg:shadow-none',
+						menuState ? 'block lg:flex' : 'hidden lg:flex'
+					])}
+				>
+					<div class="lg:hidden">
+						<ul class="space-y-6 text-base">
+							{#each menuItems as item, index (index)}
+								<li>
+									<Button
+										href={item.href}
+										variant="link"
+										class="block text-muted-foreground duration-150 hover:text-accent-foreground"
+									>
+										<span>{item.name}</span>
+									</Button>
+								</li>
+							{/each}
+						</ul>
 					</div>
-				{/if}
+					<div class="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
+						<Button variant="outline" size="sm" href="/login">Login</Button>
+						<Button href="/signup" size="sm">Sign Up</Button>
+						<ThemePicker />
+					</div>
+				</div>
 			</div>
 		</div>
 	</nav>
