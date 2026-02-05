@@ -5,6 +5,10 @@
 
 	let files: File[] = $state([]);
 
+	function s(list: any[]) {
+		return list.length > 1 ? 's' : '';
+	}
+
 	async function uploadFiles() {
 		const formData = new FormData();
 
@@ -21,7 +25,7 @@
 
 		addSuccessToast(
 			'Upload successful',
-			`${data.uploaded.length} file${data.uploaded.length > 1 ? 's' : ''} uploaded`
+			`${data.uploaded.length} file${s(data.uploaded)} uploaded`
 		);
 
 		files = [];
@@ -60,5 +64,5 @@
 		</ul>
 	{/if}
 
-	<Button onclick={uploadFiles} class="w-full py-6">Upload Challenge</Button>
+	<Button onclick={uploadFiles} class="w-full py-6">Upload Image{s(files)}</Button>
 </div>
