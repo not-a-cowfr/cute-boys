@@ -16,7 +16,7 @@
 	menuItems={[
 		{ name: 'Random', href: '/random' },
 		{ name: 'Upload', href: '/upload' },
-		{ name: 'Api Docs', href: '/docs' },
+		{ name: 'Documentation', href: 'https://github.com/not-a-cowfr/cute-boys/tree/main/docs' },
 		{ name: 'GitHub', href: 'https://github.com/not-a-cowfr/cute-boys' }
 	]}
 />
