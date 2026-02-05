@@ -96,8 +96,6 @@
 						</ul>
 					</div>
 					<div class="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
-						<Button variant="outline" size="sm" href="/login">Login</Button>
-						<Button href="/signup" size="sm">Sign Up</Button>
 						<ThemePicker />
 					</div>
 				</div>
