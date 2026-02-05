@@ -38,7 +38,7 @@
 
 <div class="flex flex-col gap-1">
 	<button
-		class="bg-muted-darker flex h-10 min-w-[220px] items-center justify-between rounded-lg border border-muted-lighter px-3 py-2 text-muted-foreground shadow transition-opacity hover:opacity-90"
+		class="flex h-10 min-w-[220px] items-center justify-between rounded-lg border border-muted-lighter bg-muted-darker px-3 py-2 text-muted-foreground shadow transition-opacity hover:opacity-90"
 		use:melt={$trigger}
 		aria-label="Food"
 	>
@@ -47,7 +47,7 @@
 	</button>
 	{#if $open}
 		<div
-			class="bg-muted-darker z-10 flex max-h-[300px] flex-col overflow-y-auto rounded-lg border border-muted-lighter p-1 shadow focus:ring-0!"
+			class="z-10 flex max-h-[300px] flex-col overflow-y-auto rounded-lg border border-muted-lighter bg-muted-darker p-1 shadow focus:ring-0!"
 			use:melt={$menu}
 			transition:fade={{ duration: 150 }}
 		>
