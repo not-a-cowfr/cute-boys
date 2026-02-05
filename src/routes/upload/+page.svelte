@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Head from '$comp/head.svelte';
 	import { addErrorToast, addSuccessToast } from '$comp/toaster.svelte';
 	import { Button } from '$comp/ui/button';
 	import { formatBytes } from '$lib/format';
@@ -32,8 +33,11 @@
 	}
 </script>
 
+<Head title="Upload a Cute Boy" />
+
 <div class="mx-auto mt-30 flex max-w-2xl flex-col gap-y-4">
 	<h1 class="text-center text-3xl font-bold">Upload Images</h1>
+
 	<label class="font-medium">
 		<p class="mb-2 font-black">Files</p>
 		<label
