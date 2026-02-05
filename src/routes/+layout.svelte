@@ -21,7 +21,11 @@
 	]}
 />
 
-{@render children?.()}
+<svelte:boundary>
+	<main class="overflow-hidden">
+		{@render children?.()}
+	</main>
+</svelte:boundary>
 
 <Toaster />
 <ThemeWatcher />

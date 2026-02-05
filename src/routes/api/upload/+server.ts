@@ -6,8 +6,6 @@ export const POST: RequestHandler = async ({ request, platform }) => {
 
 	const formData = await request.formData();
 	const files: File[] = [];
-	const singleFile = formData.get('file');
-	if (singleFile instanceof File) files.push(singleFile);
 	for (const entry of formData.getAll('files[]')) {
 		if (entry instanceof File) files.push(entry);
 	}
@@ -29,4 +27,6 @@ async function upload(bucket: R2Bucket, file: File) {
 	await bucket.put(name, await file.arrayBuffer(), {
 		httpMetadata: { contentType: file.type }
 	});
+
+	return name;
 }

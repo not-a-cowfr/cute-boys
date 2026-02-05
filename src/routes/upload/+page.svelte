@@ -1,80 +1,64 @@
 <script lang="ts">
-	import { addToast } from '$comp/toaster.svelte';
+	import { addErrorToast, addSuccessToast } from '$comp/toaster.svelte';
+	import { Button } from '$comp/ui/button';
+	import { formatBytes } from '$lib/format';
 
-	let files: FileList | null = $state(null);
+	let files: File[] = $state([]);
 
 	async function uploadFiles() {
-		if (!files || files.length === 0) {
-			addToast({
-				data: {
-					title: 'No files selected',
-					description: 'Please select at least one image.',
-					color: 'red'
-				}
-			});
-			return;
-		}
-
 		const formData = new FormData();
-		for (const file of files) formData.append('files[]', file);
 
-		const res = await fetch('/api/upload', {
+		for (const f of files) formData.append('files[]', f);
+
+		const resp = await fetch('/api/upload', {
 			method: 'POST',
 			body: formData
 		});
 
-		if (res.ok) {
-			addToast({
-				data: {
-					title: 'Upload successful',
-					description: 'Your files have been uploaded!',
-					color: 'green'
-				}
-			});
-			files = null;
-		} else {
-			addToast({
-				data: { title: 'Upload failed', description: 'Please try again later.', color: 'red' }
-			});
-		}
+		if (!resp.ok) return addErrorToast('Upload failed', await resp.text());
+
+		const data: { uploaded: string[] } = await resp.json();
+
+		addSuccessToast(
+			'Upload successful',
+			`${data.uploaded.length} file${data.uploaded.length > 1 ? 's' : ''} uploaded`
+		);
+
+		files = [];
 	}
 </script>
 
-<div
-	class="mx-auto mt-10 flex w-full max-w-md flex-col items-center justify-center gap-4 rounded-xl border border-border bg-muted p-6 shadow-md"
->
-	<h2 class="text-2xl font-semibold">Upload Images</h2>
-
-	<label
-		class="hover:muted-darker cursor-pointer rounded-xl border border-border bg-muted-lighter px-4 py-2 transition"
-	>
-		Select Images
-		<input
-			id="avatar"
-			name="avatar"
-			type="file"
-			accept="image/png, image/jpeg"
-			bind:files
-			multiple
-			class="hidden"
-		/>
+<div class="mx-auto mt-30 flex max-w-2xl flex-col gap-y-4">
+	<h1 class="text-center text-3xl font-bold">Upload Images</h1>
+	<label class="font-medium">
+		<p class="mb-2 font-black">Files</p>
+		<label
+			class="flex cursor-pointer flex-col items-center justify-center rounded-lg border border-muted-lighter bg-muted-darker py-2 hover:bg-muted-darker/40"
+		>
+			Select Files
+			<input
+				class="hidden"
+				type="file"
+				accept="image/png, image/gif, image/jpeg"
+				onchange={(e) => {
+					const selected = Array.from(e.currentTarget.files ?? []);
+					files.push(...selected);
+				}}
+				multiple
+			/>
+		</label>
 	</label>
 
-	{#if files}
-		<div class="mt-2 w-full">
-			<h3 class="mb-1 font-medium">Selected Files:</h3>
-			<ul class="list-inside list-disc space-y-1 text-sm">
-				{#each Array.from(files) as file}
-					<li>{file.name} ({(file.size / 1024).toFixed(1)} KB)</li>
-				{/each}
-			</ul>
-		</div>
-
-		<button
-			onclick={uploadFiles}
-			class="mt-3 w-full justify-center rounded-xl bg-primary py-2 font-semibold transition hover:bg-primary/80"
-		>
-			Upload
-		</button>
+	{#if files.length > 0}
+		<ul class="list-inside list-disc text-sm">
+			{#each files.entries() as [i, f]}
+				<li>
+					{f.name} ({formatBytes(f.size)})
+					<button onclick={() => files.splice(i, 1)} class="ml-1 text-destructive">remove</button>
+				</li>
+			{/each}
+		</ul>
 	{/if}
+
+	<Button onclick={uploadFiles} class="w-full py-6">Upload Challenge</Button>
 </div>
