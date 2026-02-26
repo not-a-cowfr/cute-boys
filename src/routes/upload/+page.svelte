@@ -20,14 +20,8 @@
 			body: formData
 		});
 
-		if (!resp.ok) return addErrorToast('Upload failed', await resp.text());
-
-		const data: { uploaded: string[] } = await resp.json();
-
-		addSuccessToast(
-			'Upload successful',
-			`${data.uploaded.length} file${s(data.uploaded)} uploaded`
-		);
+		if (!resp.ok) return addErrorToast('Upload failed', `Status code ${resp.status}`);
+		addSuccessToast('Upload successful', `Status code ${resp.status}`);
 
 		files = [];
 	}
