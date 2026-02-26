@@ -20,7 +20,7 @@
 			body: formData
 		});
 
-		if (!resp.ok) return addErrorToast('Upload failed', `Status code ${resp.status}`);
+		if (!resp.ok) return addErrorToast('Upload failed', 'Awaiting manual verification');
 		addSuccessToast('Upload successful', `Status code ${resp.status}`);
 
 		files = [];
