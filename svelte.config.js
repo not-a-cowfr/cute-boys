@@ -11,6 +11,9 @@ const config = {
 			$comp: './src/components',
 			$stores: './src/stores',
 			$lib: './src/lib'
+		},
+		csrf: {
+			checkOrigin: false
 		}
 	},
 	compilerOptions: {

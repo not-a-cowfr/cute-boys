@@ -1,8 +1,12 @@
+import { env } from '$env/dynamic/private';
 import type { RequestHandler } from '@sveltejs/kit';
 
-export const POST: RequestHandler = async ({ request, platform }) => {
+export const POST: RequestHandler = async ({ request, platform, url }) => {
 	const bucket = platform?.env.cuteboys;
 	if (!bucket) return new Response('Missing R2 bucket binding', { status: 500 });
+	const key = url.searchParams.get('key');
+	if (!key) return new Response('Missing api key', { status: 400 });
+	if (key !== env.PRIVATE_VALID_KEY) return new Response('Invalid api key', { status: 400 });
 
 	const formData = await request.formData();
 	const files: File[] = [];

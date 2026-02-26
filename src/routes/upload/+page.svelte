@@ -15,7 +15,7 @@
 
 		for (const f of files) formData.append('files[]', f);
 
-		const resp = await fetch('/api/upload', {
+		const resp = await fetch('http://verify.cuteboys.love', {
 			method: 'POST',
 			body: formData
 		});
